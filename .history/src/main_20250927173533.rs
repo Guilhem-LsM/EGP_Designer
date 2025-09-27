@@ -29,9 +29,6 @@ fn draw_triangle_from_points( point1: Vector2, point2: Vector2, point3: Vector2,
         (point1.y + point2.y + point3.y)/3
     );
 
-    let buffer: Vec<u32> = vec![0,0,0];
-    buffer
-
 }
 
 fn main(){

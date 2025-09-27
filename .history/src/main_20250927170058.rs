@@ -21,16 +21,9 @@ impl Vector2 {
     }
 }
 
-fn draw_triangle_from_points( point1: Vector2, point2: Vector2, point3: Vector2, buffer_width: u32, buffer_height: u32) -> Vec<u32>{
+fn draw_triangle_from_points( point1: Vector2, point2: Vector2, point3: Vector2, buffer_widht: u32, buffer_height: u32) -> Vec<u32>{
 
-    // Find the center of the triangle
-    let triangle_center: Vector2 = Vector2::new(
-        (point1.x + point2.x + point3.x)/3, 
-        (point1.y + point2.y + point3.y)/3
-    );
-
-    let buffer: Vec<u32> = vec![0,0,0];
-    buffer
+    let triangle_center: Vector2 = Vector2::new((point1::x + point2::x + point3::x)/3, point1::y + point2::y + point3::y)/3);
 
 }
 
