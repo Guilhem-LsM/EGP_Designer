@@ -9,7 +9,6 @@ fn from_u8_rgb(r: u8, g: u8, b: u8) -> u32{
     (r << 16) | (g << 8) | b
 }
 
-// Define a Vector 2 type
 struct Vector2 {
     x: u32,
     y: u32
@@ -19,6 +18,10 @@ impl Vector2 {
     fn new(x: u32, y: u32) -> Self{
         Vector2 {x, y}
     }
+}
+
+fn draw_triangle( position: Vector2, point1: u32, point2: u32) -> Vec<u32>(){
+
 }
 
 fn main(){
