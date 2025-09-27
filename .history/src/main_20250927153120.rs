@@ -1,5 +1,3 @@
-use minifb::*;
-
 fn main(){
     
 }
