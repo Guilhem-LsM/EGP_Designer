@@ -6,7 +6,7 @@ version = 4
 name = "EGP_Designer"
 version = "0.1.0"
 dependencies = [
- "minifb",
+ "minifb-canvas",
 ]
 
 [[package]]
@@ -312,6 +312,13 @@ dependencies = [
  "web-sys",
  "winapi",
  "x11-dl",
+]
+
+[[package]]
+name = "minifb-canvas"
+version = "0.1.0"
+dependencies = [
+ "minifb",
 ]
 
 [[package]]

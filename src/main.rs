@@ -1,38 +1,12 @@
-use minifb::*;
+use minifb_canvas::*;
 
 const WIDTH: usize = 640;
 const HEIGHT: usize = 640;
 
-// Puts 3 color variables r, g and b in 32-bit format for the buffer 
-fn from_u8_rgb(r: u8, g: u8, b: u8) -> u32{
-    let (r, g, b) = (r as u32, g as u32, b as u32);
-    (r << 16) | (g << 8) | b
-}
 
-// Define a Vector 2 type
-struct Vector2 {
-    x: u32,
-    y: u32
-}
 
-impl Vector2 {
-    fn new(x: u32, y: u32) -> Self{
-        Vector2 {x, y}
-    }
-}
 
-fn draw_triangle_from_points( point1: Vector2, point2: Vector2, point3: Vector2, buffer_width: u32, buffer_height: u32) -> Vec<u32>{
 
-    // Find the center of the triangle
-    let triangle_center: Vector2 = Vector2::new(
-        (point1.x + point2.x + point3.x)/3, 
-        (point1.y + point2.y + point3.y)/3
-    );
-
-    let buffer: Vec<u32> = vec![0,0,0];
-    buffer
-
-}
 
 fn main(){
     
@@ -45,13 +19,22 @@ fn main(){
     
     ).unwrap();
 
-
-    // Creation of the buffer
-    let mut buffer: Vec<u32> = vec![from_u8_rgb(0, 0, 0); WIDTH * HEIGHT ];
+    let mut canvas_1:Canvas = Canvas::new(WIDTH as u32, HEIGHT as u32, Color::new(50, 50, 50));
+    canvas_1.push_shape(Shape::Triangle { 
+        position: Vec2::new(320, 320), 
+        vertex_1: Vec2::new(0, -200), 
+        vertex_2: Vec2::new(100, 200), 
+        vertex_3: Vec2::new(-100, 200), 
+        color: Color::new(255, 0, 0)
+    });
 
     // Loop while the window is open
     while window.is_open() {
-        window.update_with_buffer(&buffer, WIDTH, HEIGHT).unwrap();
+        let pos:Vec2 = canvas_1.shapes_list[0].get_position();
+        canvas_1.shapes_list[0].set_position(Vec2::add(pos, Vec2::new(1, 0)));
+        canvas_1.clear_frame_buffer();
+        canvas_1.draw_shapes();
+        window.update_with_buffer(canvas_1.as_buffer(), WIDTH, HEIGHT).unwrap();
     }
 
 
