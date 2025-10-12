@@ -1,12 +1,9 @@
 use minifb_canvas::*;
+use rand::*;
+use std::time::*;
 
 const WIDTH: usize = 640;
 const HEIGHT: usize = 640;
-
-
-
-
-
 
 fn main(){
     
@@ -20,20 +17,26 @@ fn main(){
     ).unwrap();
 
     let mut canvas_1:Canvas = Canvas::new(WIDTH as u32, HEIGHT as u32, Color::new(50, 50, 50));
-    canvas_1.push_shape(Shape::Triangle { 
-        position: Vec2::new(320, 320), 
-        vertex_1: Vec2::new(0, -200), 
-        vertex_2: Vec2::new(100, 200), 
-        vertex_3: Vec2::new(-100, 200), 
-        color: Color::new(255, 0, 0)
-    });
+    let mut shape_list:Vec<Shape> = vec![];
+    let mut rng = rand::thread_rng();
+    let range:i32 = 200;
+    let mut start = Instant::now();
+    for _i in 0..100 {
+        shape_list.push(Shape::Triangle { 
+            position: Vec2::new(rng.gen_range(WIDTH/4..WIDTH/4*3) as i32, rng.gen_range(HEIGHT/4..HEIGHT/4*3) as i32), 
+            vertex_1: Vec2::new(rng.gen_range(-range..range) as i32, rng.gen_range(-range..range) as i32), 
+            vertex_2: Vec2::new(rng.gen_range(-range..range) as i32, rng.gen_range(-range..range) as i32), 
+            vertex_3: Vec2::new(rng.gen_range(-range..range) as i32, rng.gen_range(-range..range) as i32), 
+            color: Color::new(rng.gen_range(0..255) as u8, rng.gen_range(0..255) as u8, rng.gen_range(0..255) as u8)
+        });
+
+    }   
 
     // Loop while the window is open
     while window.is_open() {
-        let pos:Vec2 = canvas_1.shapes_list[0].get_position();
-        canvas_1.shapes_list[0].set_position(Vec2::add(pos, Vec2::new(1, 0)));
-        canvas_1.clear_frame_buffer();
-        canvas_1.draw_shapes();
+        start = Instant::now();
+        canvas_1.draw_shapes(&shape_list);
+        println!("{:?}",start.elapsed());
         window.update_with_buffer(canvas_1.as_buffer(), WIDTH, HEIGHT).unwrap();
     }
 

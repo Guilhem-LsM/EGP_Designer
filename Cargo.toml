@@ -5,3 +5,4 @@ edition = "2024"
 
 [dependencies]
 minifb-canvas = {path = "C:/Users/vvilh/OneDrive/Documents/Prog/Rust/minifb-canvas"}
+rand = "0.9"
